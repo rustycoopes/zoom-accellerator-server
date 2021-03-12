@@ -5,7 +5,7 @@ app.use(express.json());
 
 const MongoClient = require('mongodb').MongoClient;
 const { json } = require('express');
-const PORT = 8001
+const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0'
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
