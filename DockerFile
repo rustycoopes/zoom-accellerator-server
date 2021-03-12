@@ -1,7 +1,10 @@
 FROM node:14
 
+
+COPY ./zoom-link-server/ /app
+
+WORKDIR /app
 # Create app directory
-WORKDIR ./zoom-link-server/
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
