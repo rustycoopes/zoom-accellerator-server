@@ -5,7 +5,8 @@ app.use(express.json());
 
 const MongoClient = require('mongodb').MongoClient;
 const { json } = require('express');
-
+const PORT = 8001
+const HOST = '0.0.0.0'
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -16,9 +17,10 @@ app.get('/', function(req, res) {
     res.send('Hello World')
   })
 
-  app.listen(9000, function() {
-    console.log('listening on 9000')
-  })
+  app.listen(PORT, HOST) 
+  
+console.log(`Running on http://${HOST}:${PORT}`);
+
 
 app.post('/contacts', async (req, res) => {
     console.log(req.body)
