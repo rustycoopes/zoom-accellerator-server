@@ -17,13 +17,16 @@ app.get('/', function(req, res) {
     res.send('Hello World')
   })
 
-  app.listen(PORT, HOST) 
-  
+
+console.log(`About to start on http://${HOST}:${PORT}`);
+
+app.listen(PORT, HOST) 
+
 console.log(`Running on http://${HOST}:${PORT}`);
 
 
 app.post('/contacts', async (req, res) => {
-    console.log(req.body)
+    console.log('posting contact')
 
     MongoClient.connect('mongodb+srv://russ-admin:cooperman@cluster0.gqxah.mongodb.net/ZOOM?retryWrites=true&w=majority', (err, client) => {
         if (err) throw err;
@@ -43,6 +46,8 @@ app.post('/contacts', async (req, res) => {
 
 
 app.get('/contacts', async (req, res) => {
+
+   console.log('gettting contact')
 
     MongoClient.connect('mongodb+srv://russ-admin:cooperman@cluster0.gqxah.mongodb.net/ZOOM?retryWrites=true&w=majority', (err, client) => {
         const db = client.db('ZOOM')
