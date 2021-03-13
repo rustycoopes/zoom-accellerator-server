@@ -7,6 +7,8 @@ const MongoClient = require('mongodb').MongoClient;
 const { json } = require('express');
 const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0'
+const MONGO_SERVER_URL =  process.env.MONGO_SERVER_URL || 'mongodb+srv://russ-admin:cooperman@cluster0.gqxah.mongodb.net/ZOOM?retryWrites=true&w=majority'
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -14,7 +16,7 @@ app.use(function(req, res, next) {
     next();
   });
 app.get('/', function(req, res) {
-    res.send('Hello World')
+    res.send('Rusty ware - back ended for zoom contacts')
   })
 
 
@@ -28,7 +30,7 @@ console.log(`Running on http://${HOST}:${PORT}`);
 app.post('/contacts', async (req, res) => {
     console.log('posting contact')
 
-    MongoClient.connect('mongodb+srv://russ-admin:cooperman@cluster0.gqxah.mongodb.net/ZOOM?retryWrites=true&w=majority', (err, client) => {
+    MongoClient.connect(MONGO_SERVER_URL,{useNewUrlParser: true, useUnifiedTopology: true}, (err, client) => {
         if (err) throw err;
 
         const db = client.db('ZOOM')
