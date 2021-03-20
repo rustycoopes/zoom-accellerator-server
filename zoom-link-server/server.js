@@ -49,7 +49,7 @@ app.post('/contacts', async (req, res) => {
 
 app.get('/contacts', async (req, res) => {
 
-   console.log('gettting contact')
+   console.log('getting contact')
 
     MongoClient.connect('mongodb+srv://russ-admin:cooperman@cluster0.gqxah.mongodb.net/ZOOM?retryWrites=true&w=majority', (err, client) => {
         const db = client.db('ZOOM')
@@ -61,11 +61,31 @@ app.get('/contacts', async (req, res) => {
             if (err) throw err;
             res.json(result);
             client.close()  
+
         });
 
       }) 
   })
 
+  app.get('/account/:accountId/contacts', async (req, res) => {
+
+    console.log('getting contact with account id', req.params.accountId.toString())
+ 
+     MongoClient.connect('mongodb+srv://russ-admin:cooperman@cluster0.gqxah.mongodb.net/ZOOM?retryWrites=true&w=majority', (err, client) => {
+         const db = client.db('ZOOM')
+         const contactsCollection = db.collection('ZOOM-LINKS')
+ 
+         if (err) throw err;
+         const query = {accountid : req.params.accountId }
+         console.log(query)
+         contactsCollection.find(query).toArray(function(err, result) {
+             if (err) throw err;
+             res.json(result);
+             client.close()  
+         });
+       }) 
+   })
+ 
 app.delete('/contacts/:id', (req, res) => {
     var mongodb = require('mongodb');
     MongoClient.connect('mongodb+srv://russ-admin:cooperman@cluster0.gqxah.mongodb.net/ZOOM?retryWrites=true&w=majority', (err, client) => {
