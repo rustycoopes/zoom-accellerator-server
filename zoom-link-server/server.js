@@ -67,7 +67,7 @@ app.get('/contacts', async (req, res) => {
       }) 
   })
 
-  app.get('/account_contacts', async (req, res) => {
+  app.get('/contacts/account', async (req, res) => {
 
     const user_accountId = req.query.accountId
     console.log('getting contact with account id', user_accountId)
