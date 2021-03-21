@@ -67,9 +67,9 @@ app.get('/contacts', async (req, res) => {
       }) 
   })
 
-  app.get('/account/:accountId/contacts', async (req, res) => {
+  app.get('/account/:accountId', async (req, res) => {
 
-    console.log('getting contact with account id', req.params.accountId.toString())
+    console.log('getting contact with account id', req.params.accountId)
  
      MongoClient.connect('mongodb+srv://russ-admin:cooperman@cluster0.gqxah.mongodb.net/ZOOM?retryWrites=true&w=majority', (err, client) => {
          const db = client.db('ZOOM')
